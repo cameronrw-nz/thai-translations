@@ -14,7 +14,7 @@ export function StoriesList() {
 
     return (
         <>
-            <TitleBar onBack={story ? () => setStory(undefined) : undefined} />
+            <TitleBar onBack={story ? () => setStory(undefined) : undefined} title="Stories" />
             <View style={styles.container}>
 
                 {!story && stories.map(story => {

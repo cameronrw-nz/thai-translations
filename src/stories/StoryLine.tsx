@@ -60,7 +60,7 @@ export function StoryLine(props: ISentenceProps) {
         <>
             {sentencesWithDefinitions.map(sentenceWithDefinition => {
                 return (
-                    <View style={styles.sentence}>
+                    <View key={Math.random()} style={styles.sentence}>
                         {sentenceWithDefinition.map(wordWithDefinitions => {
                             return (
                                 <WordWithDefinitions

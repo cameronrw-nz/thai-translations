@@ -6,6 +6,7 @@ import { TitleBar } from "./TitleBar";
 const translations = ProcessTranslations();
 
 export function Cards() {
+    const [isShowingSentence, setIsShowingSentence] = useState<boolean>();
     const [isShowingTranslation, setIsShowingTranslation] = useState<boolean>();
     const [translation, setTranslation] = useState<ITranslation>(translations[Math.floor(Math.random() * translations.length)]);
 
@@ -14,19 +15,20 @@ export function Cards() {
         setIsShowingTranslation(false)
     }
 
-
     return (
         <>
             <TitleBar />
             <View style={styles.container}>
                 <Card>
-                    <Card.Content onTouchStart={() => setIsShowingTranslation(!isShowingTranslation)}>
+                    <Card.Content>
                         <Text style={styles.header}>{translation.thai}</Text>
-                        {isShowingTranslation ? <Text style={styles.translation}>{translation.english}</Text> : null}
+                        {isShowingSentence ? <Text style={styles.translation}>{translation.sentence}</Text> : null}
+                        {isShowingTranslation ? <Text style={styles.translation}>{translation.english.join(" / ")}</Text> : null}
                     </Card.Content>
                     <Card.Actions>
-                        <Button>Cancel</Button>
-                        <Button onPress={nextTranslation}>Ok</Button>
+                        <Button onPress={() => setIsShowingTranslation(!isShowingTranslation)}>{isShowingTranslation ? "Hide" : "Show"}</Button>
+                        <Button onPress={() => setIsShowingSentence(!isShowingSentence)} mode="outlined">Sentence</Button>
+                        <Button onPress={nextTranslation}>Next</Button>
                     </Card.Actions>
                 </Card>
             </View>

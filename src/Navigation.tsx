@@ -63,10 +63,10 @@ export default function Navigation() {
                 }}
             />
             <Tab.Screen
-                name="Cards"
+                name="Practice"
                 component={Cards}
                 options={{
-                    tabBarLabel: 'Cards',
+                    tabBarLabel: 'Practice',
                     tabBarIcon: ({ color, size }) => {
                         return <Icon name="card-multiple" size={size} color={color} />;
                     },

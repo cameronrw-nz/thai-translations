@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { Card, Button } from "react-native-paper";
 import { ITranslation, ProcessTranslations } from "../translations";
 
@@ -24,29 +24,28 @@ export function TranslationToShow(props: ITranslationToShowProps) {
         }
     })
 
-    console.log(sentences)
-
-
-
     return (
         <View style={styles.container}>
             <Card>
                 <Card.Content>
-                    <Text style={styles.text} onPress={props.onPress}>
-                        {props.translation.english.join(" / ")}
+                    <Text style={styles.text}>
+                        <Text style={styles.textThai}>{props.translation.thai.join(" / ")}</Text>{" - " + props.translation.english.join(" / ")}
                     </Text>
                 </Card.Content>
                 <Card.Content>
-                    {isShowingSentences && sentences.map(sentence => {
-                        return (
-                            <Text style={styles.sentences}>
-                                {sentence}
-                            </Text>
-                        )
-                    })}
+                    <ScrollView style={styles.scrollpane}>
+                        {isShowingSentences && sentences.map(sentence => {
+                            return (
+                                <Text key={sentence} style={styles.sentences}>
+                                    {sentence}
+                                </Text>
+                            );
+                        })}
+                    </ScrollView>
                 </Card.Content>
                 <Card.Actions>
-                    <Button onPress={() => setIsShowingSentences(true)}>Ok</Button>
+                    <Button onPress={props.onPress}>Close</Button>
+                    <Button onPress={() => setIsShowingSentences(!isShowingSentences)}>{isShowingSentences ? "Hide" : "Show"}</Button>
                 </Card.Actions>
             </Card>
         </View>
@@ -59,7 +58,14 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderTopWidth: 1,
         borderTopColor: "lightgrey",
-        paddingTop: 10
+        paddingTop: 10,
+
+    },
+    scrollpane: {
+        maxHeight: 100,
+    },
+    textThai: {
+        color: "grey"
     },
     text: {
         fontSize: 30,

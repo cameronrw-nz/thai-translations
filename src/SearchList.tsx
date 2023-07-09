@@ -14,7 +14,8 @@ export function SearchList(props: ISearchListProps) {
         <FlatList
             data={processedTranslations
                 .filter(translation => translation.thai.length !== 0
-                    && (!props.searchQuery || translation.english.includes(props.searchQuery)))}
+                    && (!props.searchQuery || translation.english.includes(props.searchQuery)))
+                .sort((a, b) => a.thai[0] < b.thai[0] ? 1 : -1)}
             renderItem={t => <SearchListItem key={t.index} item={t} />}
         />
     );
