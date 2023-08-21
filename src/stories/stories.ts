@@ -5,7 +5,7 @@ export interface ILine {
 }
 
 export interface IStory {
-    lines: ILine[];
+    paragraphs: ILine[][]
     title?: string;
 }
 
@@ -16,28 +16,35 @@ export function ProcessStories(): IStory[] {
     const stories: IStory[] = [];
 
     stringStories.forEach(storyString => {
-        const story: IStory = { lines: [] };
-        const stringLines = storyString.split("\n");
+        const story: IStory = { paragraphs: [] };
 
-        stringLines.forEach(line => {
-            if (!line) {
-                return;
-            }
+        const paragraphs = storyString.split("\n\n");
+        paragraphs.forEach(paragraphString => {
 
-            if (!story.title) {
-                story.title = line;
-            }
-            else {
-                const parts = line.split(" ")
-                const [jointSentences, ...words] = parts
+            const stringLines = paragraphString.split("\n");
 
-                const sentences = jointSentences.split(",");
+            const paragraph: ILine[] = []
+            stringLines.forEach(line => {
+                if (!line) {
+                    return;
+                }
 
-                story.lines.push({
-                    sentences,
-                    words
-                })
-            }
+                if (!story.title) {
+                    story.title = line;
+                }
+                else {
+                    const parts = line.split(" ")
+                    const [jointSentences, ...words] = parts
+
+                    const sentences = jointSentences.split(",");
+
+                    paragraph.push({
+                        sentences,
+                        words
+                    })
+                }
+            })
+            story.paragraphs.push(paragraph)
         })
 
         if (story.title) {
@@ -60,4 +67,10 @@ export const Stories = `
 แมวร้านรองเท้าชือ,ลีโอ แมว ร้าน รอง เท้า ชื่อ ลีโอ
 ชื่อของฉันแปลว่าสิงโตนะรู้ไหม ชื่อ ของ ฉัน แปล ว่า สิง โต นะ ไหม
 เจ้าลโอมักจะพูดอย่างภาคภูมิใจ เจ้า ลิโอ มัก จะ พูด อย่าง ภาคภูมิใจ
+
+แมวร้านหนังสือชื่อ,เก็นตะ,หรือเจ้าแจ่มใส แมว ร้านหนัง สือ ชื่อ เก็นตะ หรือ เจ้า แจ่ม ใส
+คำว่า"เก็น"มาจากคำว่า"เก็งกิ"ที่แปลว่าร่าเริงแจ่มใส คำ ว่า เก็น มา จาก คำ ว่า เก็งกิ ที่ แปล ว่า ร่า เริง แจ่ม ใส
+"สวัสดีจ้า,เก็นตะ" สวัสดี จา เก็นตะ
+ลูกค้ามักจะทักทายมันสเมอ ลูกค้า มัก จะ ทักทาย มัน เสมอ
+เก็นตะเป็นจุดสนใจของทุกคน เก็นตะ เป็น จุดสนใจ ของ ทุกคน
 `

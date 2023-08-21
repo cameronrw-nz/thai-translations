@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Tooltip } from "react-native-paper";
-
 import { IStory } from "./stories";
 import { StoryLine } from "./StoryLine";
 import { ITranslation } from "../translations";
@@ -19,16 +17,23 @@ export function StoryView(props: IStoryViewProps) {
         <View style={styles.container}>
             <View style={styles.storyView}>
                 <Text style={styles.title}>{props.story.title}</Text>
-                {props.story.lines.map(line => {
+                {props.story.paragraphs.map(paragraph => {
+                    console.log(paragraph)
                     return (
-                        <View key={line.sentences[0]} style={styles.line}>
-                            <StoryLine
-                                sentences={line.sentences}
-                                words={line.words}
-                                onTranslationSelected={t => setTranslationToShow(t)}
-                            />
+                        <View key={paragraph[0].sentences[0]} style={styles.storyView}>
+                            {paragraph.map(line => {
+                                return (
+                                    <View key={line.sentences[0]} style={styles.line}>
+                                        <StoryLine
+                                            sentences={line.sentences}
+                                            words={line.words}
+                                            onTranslationSelected={t => setTranslationToShow(t)}
+                                        />
+                                    </View>
+                                )
+                            })}
                         </View>
-                    )
+                    );
                 })}
             </View>
             <TranslationToShow translation={translationToShow} onPress={() => setTranslationToShow(undefined)} />
@@ -47,6 +52,10 @@ const styles = StyleSheet.create({
     storyView: {
         flex: 1,
         overflow: "scroll",
+        display: "flex"
+    },
+    paragrpah: {
+        padding: 0,
     },
     line: {
         display: "flex",
