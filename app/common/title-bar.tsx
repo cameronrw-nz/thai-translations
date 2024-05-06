@@ -45,17 +45,17 @@ export function TitleBar() {
                 >
                     <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <li>
-                            <Link href="translations" className={`link ${pathname === '/translations' ? selectedStyle : deselectedStyle}`}>
+                            <Link href="translations" onClick={() => setIsShowing(false)} className={`link ${pathname === '/translations' ? selectedStyle : deselectedStyle}`}>
                                 Translations
                             </Link>
                         </li>
                         <li>
-                            <Link href="practice" className={`link ${pathname === '/practice' ? selectedStyle : deselectedStyle}`}>
+                            <Link href="practice" onClick={() => setIsShowing(false)} className={`link ${pathname === '/practice' ? selectedStyle : deselectedStyle}`}>
                                 Practice
                             </Link>
                         </li>
                         <li>
-                            <Link href="stories" className={`link ${pathname === '/stories' ? selectedStyle : deselectedStyle}`}>
+                            <Link href="stories" onClick={() => setIsShowing(false)} className={`link ${pathname === '/stories' ? selectedStyle : deselectedStyle}`}>
                                 Stories
                             </Link>
                         </li>

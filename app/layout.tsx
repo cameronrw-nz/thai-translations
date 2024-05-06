@@ -23,7 +23,7 @@ export default function RootLayout({
         <div className="h-screen flex flex-col">
           <TitleBar />
           <div className="flex justify-center overflow-hidden">
-            <Container className="my-2 sm:m-2 space-y-4 min-w-96 xl:max-w-1/5">
+            <Container className="m-4 space-y-4 max-md:w-full md:w-184">
               {children}
             </Container>
           </div>

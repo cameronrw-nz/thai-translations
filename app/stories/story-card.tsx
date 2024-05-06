@@ -11,12 +11,9 @@ interface IStoryCardProps {
 export function StoryCard(props: IStoryCardProps) {
     return (
         <Container>
-            <div onClick={props.onPress}>
-                <div>
-                    <Translation language={TranslationLanguage.Thai} size="large">{props.story.title}</Translation>
-                </div>
+            <div className="cursor-pointer" onClick={props.onPress}>
+                <Translation language={TranslationLanguage.Thai} size="large">{props.story.title}</Translation>
             </div>
         </Container>
     )
 }
-
