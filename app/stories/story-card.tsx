@@ -13,7 +13,7 @@ export function StoryCard(props: IStoryCardProps) {
         <Container>
             <div onClick={props.onPress}>
                 <div>
-                    <Translation language={TranslationLanguage.Thai}>{props.story.title}</Translation>
+                    <Translation language={TranslationLanguage.Thai} size="large">{props.story.title}</Translation>
                 </div>
             </div>
         </Container>

@@ -56,10 +56,10 @@ export function StoryLine(props: ISentenceProps) {
     })
 
     return (
-        <>
+        <span className="space-x-2">
             {sentencesWithDefinitions.map(sentenceWithDefinition => {
                 return (
-                    <div key={Math.random()}>
+                    <span key={Math.random()}>
                         {sentenceWithDefinition.map(wordWithDefinitions => {
                             return (
                                 <WordWithDefinitions
@@ -68,9 +68,9 @@ export function StoryLine(props: ISentenceProps) {
                                     onPress={() => props.onTranslationSelected(wordWithDefinitions.translation)} />
                             )
                         })}
-                    </div>
+                    </span>
                 )
             })}
-        </>
+        </span>
     )
 }

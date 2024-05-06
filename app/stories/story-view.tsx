@@ -21,7 +21,7 @@ export function StoryView(props: IStoryViewProps) {
                 {props.story.paragraphs.map(paragraph => {
                     console.log(paragraph)
                     return (
-                        <Container key={paragraph[0].sentences[0]} className="space-y-4">
+                        <Container key={paragraph[0].sentences[0]} className="space-y-0">
                             {paragraph.map(line => {
                                 return (
                                     <div key={line.sentences[0]} >

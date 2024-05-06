@@ -11,7 +11,7 @@ export function StoriesList() {
     const [story, setStory] = useState<IStory>();
 
     return (
-        <Container className="overflow-auto">
+        <Container className="overflow-hidden">
             {!story && stories.map(story => {
                 return (
                     <StoryCard key={story.title} story={story} onPress={() => setStory(story)} />
