@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { ITranslation, ProcessTranslations } from "../translations";
-import { IWordWithDefinitions, WordWithDefinitions } from "./WordWithDefinition";
+import { IWordWithDefinitions, WordWithDefinitions } from "./word-with-definition";
+import { ITranslation, ProcessTranslations } from "../common/translations";
 
 interface ISentenceProps {
     sentences: string[];
@@ -60,7 +59,7 @@ export function StoryLine(props: ISentenceProps) {
         <>
             {sentencesWithDefinitions.map(sentenceWithDefinition => {
                 return (
-                    <View key={Math.random()} style={styles.sentence}>
+                    <div key={Math.random()}>
                         {sentenceWithDefinition.map(wordWithDefinitions => {
                             return (
                                 <WordWithDefinitions
@@ -69,18 +68,9 @@ export function StoryLine(props: ISentenceProps) {
                                     onPress={() => props.onTranslationSelected(wordWithDefinitions.translation)} />
                             )
                         })}
-                    </View>
+                    </div>
                 )
-
             })}
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    sentence: {
-        display: "flex",
-        flexDirection: "row",
-        marginRight: 10
-    },
-});
