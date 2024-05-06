@@ -27,7 +27,7 @@ export function Cards() {
             <div className="space-x-4">
                 <Button onClick={() => setIsShowingTranslation(!isShowingTranslation)}>{isShowingTranslation ? "Hide" : "Show"}</Button>
                 <Button onClick={() => setIsShowingSentence(!isShowingSentence)}>Sentence</Button>
-                <Button onClick={nextTranslation}>Next</Button>
+                <Button onClick={nextTranslation} isPrimary>Next</Button>
             </div>
         </Container>
     )

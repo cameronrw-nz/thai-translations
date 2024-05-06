@@ -49,7 +49,7 @@ export function TranslationToShow(props: ITranslationToShowProps) {
                 </div>
                 <div className="px-4 py-3 sm:px-6 sm:flex space-x-4">
                     <Button onClick={() => setIsShowingSentences(!isShowingSentences)}>{isShowingSentences ? "Hide" : "Show"}</Button>
-                    <Button onClick={() => props.onPress && props.onPress()}>Close</Button>
+                    <Button onClick={() => props.onPress && props.onPress()} isPrimary>Close</Button>
                 </div>
             </div>
         </div>
