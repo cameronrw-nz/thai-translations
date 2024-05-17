@@ -5,6 +5,7 @@ import { TranslationToShow } from "./translation-to-show";
 import { Container } from "../common/container";
 import { Translation, TranslationLanguage } from "../common/translation";
 import { ITranslation } from "../common/translations";
+import Button from "../common/button";
 
 interface IStoryViewProps {
     story: IStory
@@ -38,6 +39,9 @@ export function StoryView(props: IStoryViewProps) {
                 })}
             </Container>
             <TranslationToShow translation={translationToShow} onPress={() => setTranslationToShow(undefined)} />
+            <Container className="my-4 w-fit">
+                <Button onClick={props.onPress} isPrimary >Back</Button>
+            </Container>
         </Container>
     )
 }

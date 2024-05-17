@@ -10,7 +10,7 @@ interface IStoryCardProps {
 
 export function StoryCard(props: IStoryCardProps) {
     return (
-        <Container>
+        <Container className="my-2 p-4 rounded-xl shadow-md dark:bg-gray-800 bg-white">
             <div className="cursor-pointer" onClick={props.onPress}>
                 <Translation language={TranslationLanguage.Thai} size="large">{props.story.title}</Translation>
             </div>
