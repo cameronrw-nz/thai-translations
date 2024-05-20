@@ -1,61 +1,77 @@
 export interface ILine {
     sentences: string[];
     words: string[]
+}
 
+export interface IStoryGroup {
+    group: string;
+    stories: IStory[];
 }
 
 export interface IStory {
     paragraphs: ILine[][]
     title?: string;
+    group: string;
 }
 
 
-export function ProcessStories(): IStory[] {
-    const stringStories = Stories.split("---");
+export function ProcessStories(): IStoryGroup[] {
+    const storyGroupsString = Stories.split("###");
 
-    const stories: IStory[] = [];
+    const storyGroups: IStoryGroup[] = [];
+    storyGroupsString.forEach(storyGroup => {
+        const splitGroup = storyGroup.split("---");
+        let [group, ...stringStories] = splitGroup;
 
-    stringStories.forEach(storyString => {
-        const story: IStory = { paragraphs: [] };
+        const groupOfStories: IStoryGroup = { group, stories: [] }
 
-        const paragraphs = storyString.split("\n\n");
-        paragraphs.forEach(paragraphString => {
+        stringStories.forEach(storyString => {
+            const story: IStory = { paragraphs: [], group: group };
 
-            const stringLines = paragraphString.split("\n");
+            const paragraphs = storyString.split("\n\n");
+            paragraphs.forEach(paragraphString => {
+                const stringLines = paragraphString.split("\n");
 
-            const paragraph: ILine[] = []
-            stringLines.forEach(line => {
-                if (!line) {
-                    return;
-                }
+                const paragraph: ILine[] = []
+                stringLines.forEach(line => {
+                    if (!line) {
+                        return;
+                    }
 
-                if (!story.title) {
-                    story.title = line;
-                }
-                else {
-                    const parts = line.split(" ")
-                    const [jointSentences, ...words] = parts
+                    if (!story.title) {
+                        story.title = line;
+                    }
+                    else {
+                        const parts = line.split(" ")
+                        const [jointSentences, ...words] = parts
 
-                    const sentences = jointSentences.split(",");
+                        const sentences = jointSentences.split(",");
 
-                    paragraph.push({
-                        sentences,
-                        words
-                    })
-                }
+                        paragraph.push({
+                            sentences,
+                            words
+                        })
+                    }
+                })
+                story.paragraphs.push(paragraph)
             })
-            story.paragraphs.push(paragraph)
+
+            if (story.title) {
+                groupOfStories.stories.push(story)
+            }
         })
 
-        if (story.title) {
-            stories.push(story)
+        if (groupOfStories.stories.length) {
+            storyGroups.push(groupOfStories)
         }
     })
 
-    return stories
+    return storyGroups
 }
 
 export const Stories = `
+### 
+Childrens Stories
 ---
 แมวน้อยไร้ชื่อ
 ฉันเป็นแมว,แมวที่ไม่มีชื่อ ฉัน เป็น แมว แมว ที่ ไม่ มี ชื่อ
@@ -74,6 +90,8 @@ export const Stories = `
 ลูกค้ามักจะทักทายมันสเมอ ลูกค้า มัก จะ ทักทาย มัน เสมอ
 เก็นตะเป็นจุดสนใจของทุกคน เก็นตะ เป็น จุดสนใจ ของ ทุก คน
 ---
+### 
+Grade 1 Stories
 ---
 ราชามีลา
 ตามีลา ตา มี ลา
@@ -94,7 +112,6 @@ export const Stories = `
 ตาจือมียาดีดี ตาจือ มี ยา ดี ดี
 ตาจือทายามือชาลี ตาจือ ทา ยา มือ ชาลี
 ยาตาจือลือชา ยา ตาจือ ลือ ชา
----
 ---
 คุณป้า
 ปาปาป้า ปา ปา ป้า
