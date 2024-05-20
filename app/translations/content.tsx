@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import { SearchList } from "./search-results";
+import { TranslationsList } from "./translations-list";
 import { SearchBar } from "./search-bar";
 
 export function Content() {
@@ -15,7 +15,7 @@ export function Content() {
                 onSearch={onChangeSearch}
                 searchTerm={searchQuery}
             />
-            <SearchList searchQuery={searchQuery} />
+            <TranslationsList searchQuery={searchQuery} />
         </>
     );
 }
