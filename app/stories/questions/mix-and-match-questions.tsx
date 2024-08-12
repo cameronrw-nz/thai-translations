@@ -13,6 +13,10 @@ export function MixAndMatchQuestions(props: IMixAndMatchQuestionsProps) {
     const randomisedQuestions = useMemo(() => props.questions.sort(() => Math.random() - 0.5).map(q => q.question), []);
     const randomisedAnswers = useMemo(() => props.questions.sort(() => Math.random() - 0.5).map(q => q.answer), []);
 
+    if (props.questions.length === 0) {
+        return null;
+    }
+
     function onQuestionClicked(index: number): void {
         setQuestionIndex(index);
         resolveIsCorrectAnswer(index, answerIndex);
