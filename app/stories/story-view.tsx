@@ -6,6 +6,7 @@ import { Container } from "../common/container";
 import { Translation, TranslationLanguage } from "../common/translation";
 import { ITranslation } from "../common/translations";
 import Button from "../common/button";
+import { StoryQuestions } from "./questions/story-questions";
 
 interface IStoryViewProps {
     story: IStory
@@ -17,7 +18,7 @@ export function StoryView(props: IStoryViewProps) {
 
     return (
         <Container className="overflow-auto">
-            <Container className="space-y-4">
+            <Container className="space-y-4 mb-4">
                 <Translation language={TranslationLanguage.Thai} size="large">{props.story.title}</Translation>
                 {props.story.paragraphs.map(paragraph => {
                     console.log(paragraph)
@@ -38,9 +39,11 @@ export function StoryView(props: IStoryViewProps) {
                     );
                 })}
             </Container>
+
+            <StoryQuestions questions={props.story.questions} />
             <TranslationToShow translation={translationToShow} onPress={() => setTranslationToShow(undefined)} />
             <Container className="my-4 w-fit">
-                <Button onClick={props.onPress} isPrimary >Back</Button>
+                <Button onClick={props.onPress} isPrimary>Back</Button>
             </Container>
         </Container>
     )

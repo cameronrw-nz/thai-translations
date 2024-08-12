@@ -8,12 +8,17 @@ export interface IStoryGroup {
     stories: IStory[];
 }
 
+export interface IQuestion {
+    question: string;
+    answer: string;
+}
+
 export interface IStory {
     paragraphs: ILine[][]
     title?: string;
     group: string;
+    questions: IQuestion[];
 }
-
 
 export function ProcessStories(): IStoryGroup[] {
     const storyGroupsString = Stories.split("###");
@@ -26,9 +31,11 @@ export function ProcessStories(): IStoryGroup[] {
         const groupOfStories: IStoryGroup = { group, stories: [] }
 
         stringStories.forEach(storyString => {
-            const story: IStory = { paragraphs: [], group: group };
+            const story: IStory = { paragraphs: [], group: group, questions: [] };
 
-            const paragraphs = storyString.split("\n\n");
+            const [storyContentString, questionsAnswersString] = storyString.split("|||");
+
+            const paragraphs = storyContentString.split("\n\n");
             paragraphs.forEach(paragraphString => {
                 const stringLines = paragraphString.split("\n");
 
@@ -53,6 +60,16 @@ export function ProcessStories(): IStoryGroup[] {
                         })
                     }
                 })
+
+                const questionsAnswers = questionsAnswersString?.split("\n");
+                questionsAnswers?.forEach(questionAnswer => {
+                    if (!questionAnswer) {
+                        return;
+                    }
+                    const [question, answer] = questionAnswer.split(" ")
+                    story.questions.push({ question, answer })
+                })
+
                 story.paragraphs.push(paragraph)
             })
 
@@ -98,6 +115,11 @@ Grade 1 Stories
 ลามานาตา ลา มา นา ตา
 ราชามาหาลา ราชา มา หา ลา
 ตาพาลามาหาราชา ตา พา ลา มา หา ราชา
+|||
+ราชามี_ ลา
+ลามา_ นา
+_มาหาลา ราชา
+_พาลามาหาราชา ตา
 ---
 ดูกีฬา
 ชาลีพาตาชูมาดูกีฬา ชาลี พา ตาชู มา ดู กีฬา
@@ -105,6 +127,11 @@ Grade 1 Stories
 ดูดีดีมีรูงู ดู ดี ดี มี รู งู
 ดูดีดีมีรูปู ดู ดี ดี มี รู ปู
 ตาชูดูงู,ตาชูไม่ดูกีฬา ตาชู ดู งู ตาชู ไม่ ดู กีฬา
+|||
+ชาลีพา_มา ตาชู
+ข้างทางมี_ รูปู
+ตาชูดู_ งู
+ตาชูไม่ดู_ กีฬา
 ---
 ยาตาจือ
 มือชาลีมีปูนา มือ ชาลี มี ปู นา
@@ -112,6 +139,18 @@ Grade 1 Stories
 ตาจือมียาดีดี ตาจือ มี ยา ดี ดี
 ตาจือทายามือชาลี ตาจือ ทา ยา มือ ชาลี
 ยาตาจือลือชา ยา ตาจือ ลือ ชา
+|||
+มือชาลีมี_ ปูนา
+ชาลีร้องไห้เพราะ_ มือชา
+_มียาดี ตาจือ
+ตาจือ_ให้ชาลี ทายา
+---
+มีอะไรในแห
+คาวีและมาลีมีแพ คาวี และ มาลี มี แพ
+คาวีและมาลีมีแห คาวี และ ทาลี มี แห
+ดูซิในแหมีอะไร ดู ซิ ใน แห มี อะไร
+มาลีนัวเราะหึหึ มาลี นัวเราะ หึ หึ
+ในแหมีนาฬิกา ใน แห มี นาฬิกา
 ---
 คุณป้า
 ปาปาป้า ปา ปา ป้า
