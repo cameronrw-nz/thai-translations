@@ -13,7 +13,7 @@ interface IStoryDashboardProps {
 export function StoryDashboard(props: IStoryDashboardProps) {
 
     return (
-        <Container className="overflow-hidden">
+        <Container className="overflow-auto">
             {props.storyGroups.map(storyGroup => {
                 return (
                     <>

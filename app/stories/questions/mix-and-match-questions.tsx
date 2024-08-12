@@ -49,24 +49,26 @@ export function MixAndMatchQuestions(props: IMixAndMatchQuestionsProps) {
                     const isIncorrectStyle = questionIndex !== -1 && answerIndex !== -1 && !isQuestionCorrect;
 
                     const questionStyle = isQuestionCorrect
-                        ? "text-green-300"
+                        ? "text-green-400"
                         : index === questionIndex
                             ? isIncorrectStyle
-                                ? "text-red-300"
-                                : "text-blue-300"
-                            : "";
+                                ? "text-red-400"
+                                : "text-blue-400"
+                            : "cursor-pointer";
                     const answerStyle = isAnswerCorrect
-                        ? "text-green-300"
+                        ? "text-green-400"
                         : index === answerIndex
                             ? isIncorrectStyle
-                                ? "text-red-300"
-                                : "text-blue-300"
-                            : "";
+                                ? "text-red-400"
+                                : "text-blue-400"
+                            : "cursor-pointer";
+
+                    const baseTextStyle = "text-xl ";
 
                     return (
                         <div key={question} className="grid grid-cols-2">
-                            <span className={questionStyle} onClick={() => onQuestionClicked(index)}>{question}</span>
-                            <span className={answerStyle} onClick={() => onAnswerClicked(index)}>{answer}</span>
+                            <span className={baseTextStyle + questionStyle} onClick={() => onQuestionClicked(index)}>{question}</span>
+                            <span className={baseTextStyle + answerStyle} onClick={() => onAnswerClicked(index)}>{answer}</span>
                         </div>
                     )
                 })}
