@@ -49,7 +49,7 @@ export function TranslationsList(props: ISearchListProps) {
                     {resultCountString}
                 </i>
                 <Switch isChecked={isShowingScore} onChange={setIsShowingScore}>
-                    Show Practice Answer Score
+                    Show Practice Score
                 </Switch>
             </span>
             <Container className="space-y-4 max-h-full overflow-y-auto">
