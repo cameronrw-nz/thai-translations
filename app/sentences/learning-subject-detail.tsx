@@ -32,7 +32,7 @@ export function LearningSubjectDetails(props: ILearningSubjectDetailProps) {
                         })}
                         {grouping.questions.map(question => {
                             return (
-                                <Container className="my-2 p-2 rounded-xl shadow-md dark:bg-gray-900 bg-white">
+                                <Container className="my-1 p-2 rounded-xl shadow-md dark:bg-gray-900 bg-white">
                                     <Container className="px-2 ">
                                         <StoryLine
                                             sentences={[question.question]}
