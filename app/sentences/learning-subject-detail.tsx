@@ -16,13 +16,13 @@ export function LearningSubjectDetails(props: ILearningSubjectDetailProps) {
             <Translation language={TranslationLanguage.Thai} size="large">{props.learningSubject.topic}</Translation>
             {props.learningSubject.groupings.map(grouping => {
                 return (
-                    <Container className="my-2 p-4 rounded-xl shadow-md dark:bg-gray-800 bg-white">
+                    <Container key={grouping.groupingName} className="my-2 p-4 rounded-xl shadow-md dark:bg-gray-800 bg-white">
                         <Container className="border-solid border-b-2 border-sky-800">
                             <Translation language={TranslationLanguage.Thai} size="medium">{grouping.groupingName}</Translation>
                         </Container>
                         {grouping.sentences.map(sentence => {
                             return (
-                                <Container className="px-2">
+                                <Container key={sentence.sentence} className="px-2">
                                     <StoryLine
                                         sentences={[sentence.sentence]}
                                         words={sentence.parts}
@@ -32,7 +32,7 @@ export function LearningSubjectDetails(props: ILearningSubjectDetailProps) {
                         })}
                         {grouping.questions.map(question => {
                             return (
-                                <Container className="my-1 p-2 rounded-xl shadow-md dark:bg-gray-900 bg-white">
+                                <Container key={question.question} className="my-1 p-2 rounded-xl shadow-md dark:bg-gray-900 bg-white">
                                     <Container className="px-2 ">
                                         <StoryLine
                                             sentences={[question.question]}
@@ -42,7 +42,7 @@ export function LearningSubjectDetails(props: ILearningSubjectDetailProps) {
                                     <Container className={(question.answers.length > 0 ? "p-2 mt-2 rounded-xl shadow-md dark:bg-gray-800 bg-white" : "")}>
                                         {question.answers.map(answer => {
                                             return (
-                                                <Container>
+                                                <Container key={answer.answer} >
                                                     <StoryLine
                                                         sentences={[answer.answer]}
                                                         words={answer.parts}
