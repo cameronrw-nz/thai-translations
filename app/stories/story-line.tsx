@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { IWordWithDefinitions, WordWithDefinitions } from "./word-with-definition";
 import { ITranslation, ProcessTranslations } from "../common/translations";
+import { TranslationToShow } from "./translation-to-show";
 
 interface ISentenceProps {
     sentences: string[];
     words: string[];
-    onTranslationSelected: (t?: ITranslation) => void;
 }
 
 const translations = ProcessTranslations();
 
 export function StoryLine(props: ISentenceProps) {
+    const [translationToShow, setTranslationToShow] = useState<ITranslation | undefined>();
     const sentencesWithDefinitions: IWordWithDefinitions[][] = []
 
     let wordIndex: number = 0;
@@ -65,12 +66,13 @@ export function StoryLine(props: ISentenceProps) {
                                 <WordWithDefinitions
                                     key={Math.random()}
                                     wordWithDefinitions={wordWithDefinitions}
-                                    onPress={() => props.onTranslationSelected(wordWithDefinitions.translation)} />
+                                    onPress={() => setTranslationToShow(wordWithDefinitions.translation)} />
                             )
                         })}
                     </span>
                 )
             })}
+            <TranslationToShow translation={translationToShow} onPress={() => setTranslationToShow(undefined)} />
         </span>
     )
 }

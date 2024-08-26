@@ -55,6 +55,11 @@ export function TitleBar() {
                             </Link>
                         </li>
                         <li>
+                            <Link href="sentences" onClick={() => setIsShowing(false)} className={`link ${pathname === '/sentences' ? selectedStyle : deselectedStyle}`}>
+                                Sentences
+                            </Link>
+                        </li>
+                        <li>
                             <Link href="stories" onClick={() => setIsShowing(false)} className={`link ${pathname === '/stories' ? selectedStyle : deselectedStyle}`}>
                                 Stories
                             </Link>

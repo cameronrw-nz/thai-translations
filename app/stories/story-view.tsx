@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { IStory } from "./stories";
 import { StoryLine } from "./story-line";
-import { TranslationToShow } from "./translation-to-show";
 import { Container } from "../common/container";
 import { Translation, TranslationLanguage } from "../common/translation";
-import { ITranslation } from "../common/translations";
 import Button from "../common/button";
 import { StoryQuestions } from "./questions/story-questions";
 
@@ -14,7 +12,6 @@ interface IStoryViewProps {
 }
 
 export function StoryView(props: IStoryViewProps) {
-    const [translationToShow, setTranslationToShow] = useState<ITranslation | undefined>();
 
     return (
         <Container className="overflow-auto">
@@ -30,7 +27,6 @@ export function StoryView(props: IStoryViewProps) {
                                         <StoryLine
                                             sentences={line.sentences}
                                             words={line.words}
-                                            onTranslationSelected={t => setTranslationToShow(t)}
                                         />
                                     </div>
                                 )
@@ -41,7 +37,6 @@ export function StoryView(props: IStoryViewProps) {
             </Container>
 
             <StoryQuestions questions={props.story.questions} />
-            <TranslationToShow translation={translationToShow} onPress={() => setTranslationToShow(undefined)} />
             <Container className="my-4 w-fit">
                 <Button onClick={props.onPress} isPrimary>Back</Button>
             </Container>
