@@ -83,7 +83,7 @@ function processLine(line: string): [string, string[]] {
     const parts = line.split(" ");
     const [sentence, ...words] = parts;
 
-    return [sentence, words];
+    return [sentence.trim(), words];
 }
 
 

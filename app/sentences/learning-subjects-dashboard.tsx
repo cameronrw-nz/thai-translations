@@ -29,7 +29,7 @@ export function LearningSubjectsDashboard() {
     }
 
     return (
-        <Container className="overflow-auto">
+        <Container className="h-full">
             {display}
         </Container>
     );
